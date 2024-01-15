@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Authentication;
@@ -7,6 +8,7 @@ using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
@@ -14,7 +16,9 @@ public class LobbyManager : MonoBehaviour
     public GameObject serverLists;
     public TMP_Text lobbyTxt;
     private Lobby hostLobby;
+    private Lobby joinedLobby;
     private float heartbeatTimer;
+    private float lobbyUpdateTimer;
     public string playerName;
     private async void Start()
     {
@@ -116,6 +120,8 @@ public class LobbyManager : MonoBehaviour
     {
         //for making lobby stay active for more than 30 seconds even in no players state...
         HandleLobbyHeartbeat(); 
+        //for polling the changes ion connected lobby
+        HandleLobbyPollForUpdate();
     }
     private async void HandleLobbyHeartbeat()
     {
@@ -127,6 +133,21 @@ public class LobbyManager : MonoBehaviour
                 float heartbeatTimeMax = 15;
                 heartbeatTimer = heartbeatTimeMax;
                 await LobbyService.Instance.SendHeartbeatPingAsync(hostLobby.Id);
+            }
+        }
+    }
+
+    private async void HandleLobbyPollForUpdate()
+    {
+        if (joinedLobby != null)
+        {
+            lobbyUpdateTimer -= Time.deltaTime;
+            if (lobbyUpdateTimer < 0)
+            {
+                float lobbyUpdateTimerMax = 1-1f;
+                lobbyUpdateTimer = lobbyUpdateTimerMax;
+                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
+                joinedLobby = lobby;
             }
         }
     }
@@ -164,6 +185,7 @@ public class LobbyManager : MonoBehaviour
             };
             Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, joinLobbyByCodeOptions);
             PrintPlayers(lobby);
+            joinedLobby = lobby;
         }catch(LobbyServiceException e)
         {
             Debug.LogError(e);
@@ -178,5 +200,85 @@ public class LobbyManager : MonoBehaviour
             Debug.Log(player.Id);
         }
     }
+
+    private async void UpdateLobbyGameMode(string gameMode)
+    {
+        try
+        {
+            hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+            {
+                Data = new Dictionary<string, DataObject>
+                {
+                    {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, gameMode) }
+                }
+            });
+            joinedLobby = hostLobby;
+            PrintPlayers(hostLobby);
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogException(e);
+        }
+    }
+
+
+    private async void UpdatePlayerName(string newPlayerName)
+    {
+        try
+        {
+            playerName = newPlayerName;
+            await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId, new UpdatePlayerOptions
+            {
+                Data = new Dictionary<string, PlayerDataObject>
+            {
+                {
+                "PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName)
+                }
+            }
+            }
+            );
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogException(e);
+        }
+    }
    
+
+    private async void LeaveLobby()
+    {
+        try
+        {
+            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+        }catch(LobbyServiceException e)
+        {
+            Debug.LogException(e);
+        }
+    }
+
+    private async void KickPlayer(string playerId)
+    {
+        try
+        {
+            if(hostLobby != null)
+            {
+                await LobbyService.Instance.RemovePlayerAsync(hostLobby.Id, playerId);
+            }
+        }catch(LobbyServiceException e)
+        {
+            Debug.LogException(e);
+        }
+    }
+
+    private async void RemoveLobby()
+    {
+        try
+        {
+            await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogException(e);
+        }
+    }
 }
