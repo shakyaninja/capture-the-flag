@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a59f4f6bfa9464f90c87a0a08f2e16, type: 3}
+  m_Name: ConsoleUITheme
+  m_EditorClassIdentifier: 
+  <Input>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Log>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Warnings>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Errors>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Exceptions>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Assert>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Stacktrace>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  _message_Log:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _message_Warnings:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _message_Errors:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _message_Exceptions:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _message_Assert:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _output_Log:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _output_Warnings:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _output_Errors:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _output_Exceptions:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _output_Assert:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  <Header>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Background>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Foreground>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Font>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <FontSelected>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <FontPressed>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <ScrollBar_Background>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <ScrollBar_Foreground>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  _main_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _consoleList_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _consoleList_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _consoleList_ScrollBar_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _consoleList_ScrollBar_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _suggestions_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _suggestions_Font:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _suggestions_FontSelected:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _suggestions_FontPressed:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _suggestions_ScrollBar_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _suggestions_ScrollBar_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _commandLine_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _commandLine_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _commandLine_Font:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _commandLineControls_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _commandLineControls_Font:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _resize_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _resize_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _resize_Font:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  filter_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  filter_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  filter_Font:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboard_Header:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboard_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboard_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboard_Font:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboard_ScrollBar_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboard_ScrollBar_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardInfo_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardInfo_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardInfo_Font:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardInfo_ScrollBar_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardInfo_ScrollBar_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_Font:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_FontSelected:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_FontPressed:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_ScrollBar_Background:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_ScrollBar_Foreground:
+    _isEnabled: 0
+    _value: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_NonRequired: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_Required: {r: 0, g: 0, b: 0, a: 0}
+  _dashboardItem_Toggle: {r: 0, g: 0, b: 0, a: 0}
