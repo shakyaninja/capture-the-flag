@@ -20,6 +20,7 @@ public class LobbyManager : MonoBehaviour
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
     public string playerName;
+    [SerializeField] LobbyElement lobbyElement;
     private async void Start()
     {
         await UnityServices.InitializeAsync();
@@ -105,7 +106,9 @@ public class LobbyManager : MonoBehaviour
             foreach (Lobby lobby in queryResponse.Results)
             {
                 Debug.Log("name : " + lobby.Name + " " + "code : " + lobby.LobbyCode + " " + "Max Players : " + lobby.MaxPlayers);
-                lobbyTxt.SetText("name : " + lobby.Name + " " + "code : " + lobby.LobbyCode + " " + "Max Players : " + lobby.MaxPlayers);
+                //lobbyTxt.SetText("name : " + lobby.Name + " " + "code : " + lobby.LobbyCode + " " + "Max Players : " + lobby.MaxPlayers);
+                LobbyElement lobbyEm = Instantiate(lobbyElement, serverLists.transform);
+                lobbyEm.InitializeValues(lobby.Name, lobby.LobbyCode, string.Format("{0}/{1}",lobby.Players.Count,lobby.MaxPlayers));
                 //lobbyTxt.transform.SetParent(ServerLists.transform);
                 //ServerLists.GetComponent<VerticalLayoutGroup>().
             }
@@ -230,11 +233,11 @@ public class LobbyManager : MonoBehaviour
             await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId, new UpdatePlayerOptions
             {
                 Data = new Dictionary<string, PlayerDataObject>
-            {
                 {
-                "PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName)
+                    {
+                    "PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName)
+                    }
                 }
-            }
             }
             );
         }
