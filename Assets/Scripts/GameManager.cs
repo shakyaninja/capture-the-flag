@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 
 public class GameManager : NetworkBehaviour
@@ -14,6 +15,7 @@ public class GameManager : NetworkBehaviour
     public UIManager uiManager = null;
     public Transform[] playerSpawnPositions;
     public GameObject PlayerPrefab;
+    public Lobby activeLobby;
 
     public struct Player 
     {
@@ -22,24 +24,29 @@ public class GameManager : NetworkBehaviour
         public int score;
     }
 
-        /*public struct Player: INetworkSerializable
+    /*public struct Player: INetworkSerializable
+    {
+        public ulong clientId;
+        public string name;
+        public int score;
+
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
-            public ulong clientId;
-            public string name;
-            public int score;
+            serializer.SerializeValue(ref clientId);
+            serializer.SerializeValue(ref name);
+            serializer.SerializeValue(ref score);
+        }
+    }*/
 
-            public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-            {
-                serializer.SerializeValue(ref clientId);
-                serializer.SerializeValue(ref name);
-                serializer.SerializeValue(ref score);
-            }
-        }*/
-
-        // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -123,7 +130,6 @@ public class GameManager : NetworkBehaviour
 
     public void StartGame()
     {
-
         //check if available servers
         bool availableServers = false;
         if(availableServers)

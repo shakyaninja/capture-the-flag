@@ -3,20 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 
 public class StatsManager : NetworkBehaviour
 {
-    [SerializeField] private int Score;
+    [SerializeField] private List<PlayersScoreData> playersScore;
     [SerializeField] private NetworkVariable<float> Timer = new NetworkVariable<float>();
-    //[SerializeField]private float Timer = 0;
 
+    public struct PlayersScoreData
+    {
+        public Player player;
+        public int score;
+
+        internal void SetScore(int v)
+        {
+            score = v;
+        }
+    }
     override public void OnNetworkSpawn()
     {
         if (IsServer)
         {
-            Score = 0;
             Timer.Value = 0;
+            playersScore.Clear();
+            playersScore = new List<PlayersScoreData>();
+            GameManager.Instance.activeLobby.Players.ForEach(p =>
+            {
+                PlayersScoreData playerInfo = new PlayersScoreData
+                {
+                    player = p,
+                    score = 0
+                };
+                playersScore.Add(playerInfo);
+            });
         }
     }
     private void Update()
@@ -37,14 +57,27 @@ public class StatsManager : NetworkBehaviour
         return (int)Math.Floor(Timer.Value);
     }
 
-    public int GetScore()
+    public int GetScoreByPlayerId(string playerId)
     {
-        return Score;
+        foreach (PlayersScoreData playerScore in playersScore)
+        {
+            if(playerScore.player.Id == playerId)
+            {
+                return playerScore.score;
+            }
+        }
+        return 0;
     }
 
-    public void IncrementScore()
+    public void IncrementScoreByPlayerId(string playerId)
     {
-        Score = Score + 1;
+        for (int i = 0;i< playersScore.Count;i++)
+        {
+            if (playersScore[i].player.Id == playerId)
+            {
+                playersScore[i].SetScore(playersScore[i].score + 1);
+            }
+        }
         GameManager.Instance.UpdateScoreOfPlayerServerRpc();
     }
 }

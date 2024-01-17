@@ -1,3 +1,5 @@
+using NCalc.Domain;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +18,13 @@ public class LobbyElement : MonoBehaviour
         this.lobbyName.SetText(lobbyName);
         this.lobbyCode.SetText(lobbyCode);
         this.maxPlayers.SetText(maxPlayers);
+        JoinLobby.onClick.AddListener(delegate { joinLobbyByCode(lobbyCode); });
+    }
+
+    private void joinLobbyByCode(string lobbyCode)
+    {
+        Debug.Log("join lobby triggered : "+lobbyCode);
+        LobbyManager.Instance.JoinLobby(lobbyCode);
     }
 
     void Start()
