@@ -22,7 +22,7 @@ public class SafeSide : NetworkBehaviour
         {
             //safe side 
             Debug.Log("Scored !!");
-            GameManager.Instance.statsManager.IncrementScore();
+            //GameManager.Instance.statsManager.IncrementScoreByPlayerId();
             isInsideSafeArea = false;
             startTime = 0;
 

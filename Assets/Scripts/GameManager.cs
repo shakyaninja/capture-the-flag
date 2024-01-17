@@ -14,6 +14,7 @@ public class GameManager : NetworkBehaviour
     public StatsManager statsManager = null;
     public UIManager uiManager = null;
     public Transform[] playerSpawnPositions;
+    public Color[] playerSpawnColors;
     public GameObject PlayerPrefab;
     public Lobby activeLobby;
 
@@ -130,7 +131,7 @@ public class GameManager : NetworkBehaviour
 
     public void StartGame()
     {
-        //check if available servers
+        /*//check if available servers
         bool availableServers = false;
         if(availableServers)
         {
@@ -142,7 +143,14 @@ public class GameManager : NetworkBehaviour
             //create new server or host
             StartHost();
         }
-        uiManager.TriggerWaitingForPlayer();
+        uiManager.TriggerWaitingForPlayer();*/
+        //loop in players
+        //Spawn each of them on new places
+        foreach (var player in players)
+        {
+            SpawnPlayer(player.clientId);   
+        }
+        //spawn flag
     }
 
     public void SpawnPlayer(ulong clientId)
@@ -151,6 +159,7 @@ public class GameManager : NetworkBehaviour
         int randomIndex = UnityEngine.Random.Range(0, playerSpawnPositions.Length - 1);
         Transform playerTransform = playerSpawnPositions[randomIndex];
         GameObject instantiatedPlayerPrefab = Instantiate(PlayerPrefab, playerTransform);
+        instantiatedPlayerPrefab.GetComponent<Material>().color = playerSpawnColors[randomIndex];
         instantiatedPlayerPrefab.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
     }
 

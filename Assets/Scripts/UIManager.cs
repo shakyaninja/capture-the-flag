@@ -27,7 +27,7 @@ public class UIManager : NetworkBehaviour
 
     private void UpdateScoreText()
     {
-        scoreText.SetText(GameManager.Instance.statsManager.GetScore().ToString());
+        //scoreText.SetText(GameManager.Instance.statsManager.GetScore().ToString());
     }
 
     // Update is called once per frame
